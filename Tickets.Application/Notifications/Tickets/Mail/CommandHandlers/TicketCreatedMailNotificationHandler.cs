@@ -37,7 +37,10 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
 
          foreach (var mailMessage in mailMessages)
          {
-            await _mailSender.SendEmailAsync(mailMessage);
+            if (!await _mailSender.SendEmailAsync(mailMessage))
+            {
+               result.AddWarning(new Warning($"Sending mail failed. Message: {JsonSerializer.Serialize(mailMessage)}"));
+            }
          }
       }
 
