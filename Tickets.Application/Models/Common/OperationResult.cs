@@ -5,9 +5,11 @@ namespace Tickets.Application.Models.Common;
 public class OperationResult<T>
 {
    public T? Payload { get; private set; }
-   public bool IsError { get; private set; }
    public List<Error> Errors { get; private set; } = new List<Error>();
    public List<Warning> Warnings { get; private set; } = new List<Warning>();
+
+   public bool HasErrors => Errors.Any();
+   public bool HasWarnings => Warnings.Any();
 
    public void SetPayload(T payload)
    {
@@ -16,7 +18,6 @@ public class OperationResult<T>
 
    public void AddError(Error e)
    {
-      IsError = true;
       Errors.Add(e);
    }
 
@@ -27,7 +28,6 @@ public class OperationResult<T>
 
    public void AddError(Exception e)
    {
-      IsError = true;
       Errors.Add(new Error(code: ErrorCode.UnknownError, message: "exception: " + e.Message
          + ", innerException: " + (e.InnerException != null ? e.InnerException.Message : "")));
    }

@@ -19,7 +19,7 @@ public class MailService : IMailService
       foreach (var mailMessage in mailMessages)
       {
          var sendMailResult = await _mediator.Send(new SendMail(mailMessage));
-         if (sendMailResult.IsError)
+         if (sendMailResult.HasErrors)
          {
             failedMailMessages.Add(mailMessage);
          }

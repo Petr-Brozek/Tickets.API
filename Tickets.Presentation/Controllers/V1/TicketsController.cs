@@ -32,7 +32,7 @@ public class TicketsController : ApiBaseController
    {
       var result = await _mediator.Send(new GetAllTickets());
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       var ticketsResponse = _mapper.Map<IEnumerable<TicketResponse>>(result.Payload);
@@ -48,7 +48,7 @@ public class TicketsController : ApiBaseController
       var command = new GetTicketById(Guid.Parse(id));
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       var ticketResponse = _mapper.Map<TicketResponse>(result.Payload);
@@ -64,7 +64,7 @@ public class TicketsController : ApiBaseController
       var command = _mapper.Map<CreateTicket>(newTicket);
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       var ticketResponse = _mapper.Map<TicketResponse>(result.Payload);
@@ -83,7 +83,7 @@ public class TicketsController : ApiBaseController
 
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       var ticketCommentResponse = _mapper.Map<TicketCommentResponse>(result.Payload);
@@ -104,7 +104,7 @@ public class TicketsController : ApiBaseController
 
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       return NoContent();
@@ -118,7 +118,7 @@ public class TicketsController : ApiBaseController
       var command = new ChangeTicketState(Guid.Parse(id), stateToUpdate.NewStateName);
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       return NoContent();

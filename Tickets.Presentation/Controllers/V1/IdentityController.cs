@@ -32,7 +32,7 @@ public class IdentityController : ApiBaseController
       var command = _mapper.Map<Application.Identity.Commands.Login>(login);
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       var response = _mapper.Map<Contracts.Identity.Responses.Login>(result.Payload);
@@ -46,7 +46,7 @@ public class IdentityController : ApiBaseController
    {
       var result = await _mediator.Send(new Application.Identity.Commands.Logout());
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       return NoContent();
@@ -60,7 +60,7 @@ public class IdentityController : ApiBaseController
       var command = _mapper.Map<Application.Identity.Commands.Register>(userToRegister);
       var result = await _mediator.Send(command);
 
-      if (result.IsError)
+      if (result.HasErrors)
          return HandleErrorResonse(result.Errors);
 
       return NoContent();
