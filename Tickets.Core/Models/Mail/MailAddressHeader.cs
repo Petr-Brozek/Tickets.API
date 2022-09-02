@@ -1,5 +1,5 @@
 ﻿namespace Tickets.Core.Models.Mail;
-public class MailAddressHeader
+public class MailAddressEntry
 {
    public IList<MailAddress> To { get; } = new List<MailAddress>();
    public IList<MailAddress> Cc { get; } = new List<MailAddress>();

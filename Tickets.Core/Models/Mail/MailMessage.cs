@@ -12,7 +12,7 @@ public class MailMessage
    {
 
    }
-   public MailMessage(MailAddressHeader mailAddressHeader, MailContent mailContent)
+   public MailMessage(MailAddressEntry mailAddressHeader, MailContent mailContent)
    {
       To = mailAddressHeader.To;
       Cc = mailAddressHeader.Cc;

@@ -32,8 +32,8 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
       try
       {
          var mailContent = _mailContentManager.TicketCreated(request.Ticket);
-         var mailAddressHeaders = await GenerateMailAddressHeadersAsync(GetProperSubscriptions(request.Ticket));
-         var mailMessages = mailAddressHeaders.Select(mah => new MailMessage(mah, mailContent));
+         var mailAddressEntries = await GenerateMailAddressEntriesAsync(GetProperSubscriptions(request.Ticket));
+         var mailMessages = mailAddressEntries.Select(mah => new MailMessage(mah, mailContent));
 
          foreach (var mailMessage in mailMessages)
          {
@@ -57,32 +57,24 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
             && s.OnTicketAction == TicketSubscriptionAction.OnCreated
             && s.DistrType == TicketSubscriptionDistrType.Mail);
 
-   private async Task<List<MailAddressHeader>> GenerateMailAddressHeadersAsync(IEnumerable<TicketSubscription> subscriptions)
+   private async Task<List<MailAddressEntry>> GenerateMailAddressEntriesAsync(IEnumerable<TicketSubscription> subscriptions)
    {
-      var mailAddressHeaders = new List<MailAddressHeader>();
+      var mailAddressEntries = new List<MailAddressEntry>();
       foreach (var subscription in subscriptions)
       {
-         var mailAddressHeader = new MailAddressHeader();
-         var userProfile = await _qryRepo.UserProfile.GetUserProfileWithDetailsByIdAsync(subscription.SubscriberUserProfileId);
-         if (userProfile != null)
+         var mailAddressEntry = new MailAddressEntry();
+         var subscriberUserProfile = await _qryRepo.UserProfile.GetUserProfileWithDetailsByIdAsync(subscription.SubscriberUserProfileId);
+         if (subscriberUserProfile != null)
          {
-            mailAddressHeader.To.Add(new MailAddress(userProfile.BasicInfo.FirstName,
-               userProfile.BasicInfo.EmailAddress));
+            mailAddressEntry.To.Add(new MailAddress(subscriberUserProfile.BasicInfo.FirstName,
+               subscriberUserProfile.BasicInfo.EmailAddress));
          }
-      }
-      return mailAddressHeaders;
-   }
-
-   private static OperationResult<Unit> RegisterFailedMailMessagesIfAny(OperationResult<Unit> result, IEnumerable<MailMessage> failedMailMessages)
-   {
-      if (failedMailMessages != null && failedMailMessages.Any())
-      {
-         foreach (var failedMailMessage in failedMailMessages)
+         else
          {
-            result.AddWarning(new Warning($"Sending mail failed. Failed message: {JsonSerializer.Serialize(failedMailMessage)}"));
+            // TO DO:  Handle error
          }
+         mailAddressEntries.Add(mailAddressEntry);
       }
-
-      return result;
+      return mailAddressEntries;
    }
 }
