@@ -4,6 +4,6 @@ namespace Tickets.Core.Abstractions.Mail;
 
 public interface IMailSender
 {
-    void SendEmail(MailMessage message);
-    Task SendEmailAsync(MailMessage message);
+   bool SendEmail(MailMessage message);
+   Task<bool> SendEmailAsync(MailMessage message);
 }

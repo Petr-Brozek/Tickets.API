@@ -34,8 +34,8 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
          var mailContent = _mailContentManager.TicketCreated(request.Ticket);
          var mailAddressHeaders = await GenerateMailAddressHeadersAsync(GetProperSubscriptions(request.Ticket));
          var mailMessages = mailAddressHeaders.Select(mah => new MailMessage(mah, mailContent));
-         
-         foreach(var mailMessage in mailMessages)
+
+         foreach (var mailMessage in mailMessages)
          {
             await _mailSender.SendEmailAsync(mailMessage);
          }
