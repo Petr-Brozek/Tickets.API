@@ -1,5 +1,4 @@
-﻿using Tickets.Application.Mail;
-using Tickets.Application.Notifications.Tickets.Mail;
+﻿using Tickets.Application.Notifications.Tickets.Mail;
 using Tickets.Core.Abstractions.Mail;
 using Tickets.Core.Abstractions.Notifications.Tickets;
 using Tickets.Core.Abstractions.Repositories.CmdRepo;
@@ -24,7 +23,6 @@ public class InfrastructureLayerRegistrars : IWebApplicationBuilderRegistrar
               .Get<MailConfiguration>();
       builder.Services.AddSingleton(emailConfig);
       builder.Services.AddScoped<IMailSender, MailSender>();
-      builder.Services.AddScoped<IMailService, MailService>();
       builder.Services.AddScoped<ITicketNotificationsMailContentMaker, TicketNotificationsMailContentMaker>();
    }
 }

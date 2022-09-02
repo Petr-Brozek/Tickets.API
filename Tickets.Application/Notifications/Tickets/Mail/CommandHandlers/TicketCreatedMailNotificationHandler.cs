@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Text.Json;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Notifications.Tickets.Mail.Commands;
 using Tickets.Core.Abstractions.Mail;
@@ -14,15 +15,14 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
 {
    private readonly IQueryRepositoryWrapper _qryRepo;
    private readonly ITicketNotificationsMailContentMaker _mailContentManager;
-   private readonly IMailService _mailService;
+   private readonly IMailSender _mailSender;
 
    public TicketCreatedMailNotificationHandler(IQueryRepositoryWrapper qryRepo,
-      ITicketNotificationsMailContentMaker mailContentManager,
-      IMailService sendMailService)
+      ITicketNotificationsMailContentMaker mailContentManager, IMailSender mailSender)
    {
       _qryRepo = qryRepo;
       _mailContentManager = mailContentManager;
-      _mailService = sendMailService;
+      _mailSender = mailSender;
    }
 
    public async Task<OperationResult<Unit>> Handle(TicketCreatedMailNotification request, CancellationToken cancellationToken)
@@ -34,11 +34,10 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
          var mailContent = _mailContentManager.TicketCreated(request.Ticket);
          var mailAddressHeaders = await GenerateMailAddressHeadersAsync(GetProperSubscriptions(request.Ticket));
          var mailMessages = mailAddressHeaders.Select(mah => new MailMessage(mah, mailContent));
-         var failedMailMessages = await _mailService.SendMailMessagesGetFailedAsync(mailMessages);
-
-         if (failedMailMessages.Any())
+         
+         foreach(var mailMessage in mailMessages)
          {
-            // TO DO: Handle send failures
+            await _mailSender.SendEmailAsync(mailMessage);
          }
       }
 
@@ -69,5 +68,18 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
          }
       }
       return mailAddressHeaders;
+   }
+
+   private static OperationResult<Unit> RegisterFailedMailMessagesIfAny(OperationResult<Unit> result, IEnumerable<MailMessage> failedMailMessages)
+   {
+      if (failedMailMessages != null && failedMailMessages.Any())
+      {
+         foreach (var failedMailMessage in failedMailMessages)
+         {
+            result.AddWarning(new Warning($"Sending mail failed. Failed message: {JsonSerializer.Serialize(failedMailMessage)}"));
+         }
+      }
+
+      return result;
    }
 }
