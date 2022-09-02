@@ -1,4 +1,4 @@
-﻿using Tickets.Core.Abstractions;
+﻿using Tickets.Core.Abstractions.Notifications.Tickets;
 using Tickets.Core.Aggregates.TicketAggregate;
 using Tickets.Core.Models.Mail;
 

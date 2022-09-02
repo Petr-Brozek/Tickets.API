@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Tickets.Application.Mail.Commands;
-using Tickets.Core.Abstractions;
+using Tickets.Core.Abstractions.Mail;
 using Tickets.Core.Models.Mail;
 
 namespace Tickets.Application.Mail;
@@ -25,16 +25,5 @@ public class MailService : IMailService
             }
         }
         return failedMailMessages;
-    }
-
-    public IList<MailMessage> GenerateMailMessages(IList<MailAddressHeader> mailAddressHeaders, MailContent mailContent)
-    {
-        var mailMessages = new List<MailMessage>();
-        foreach (var mailAddressHeader in mailAddressHeaders)
-        {
-            var mailMessage = new MailMessage(mailAddressHeader, mailContent);
-            mailMessages.Add(mailMessage);
-        }
-        return mailMessages;
     }
 }

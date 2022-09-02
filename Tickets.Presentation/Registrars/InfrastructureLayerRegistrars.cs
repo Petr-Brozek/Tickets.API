@@ -1,6 +1,7 @@
 ﻿using Tickets.Application.Mail;
 using Tickets.Application.Notifications.Tickets.Mail;
-using Tickets.Core.Abstractions;
+using Tickets.Core.Abstractions.Mail;
+using Tickets.Core.Abstractions.Notifications.Tickets;
 using Tickets.Core.Abstractions.Repositories.CmdRepo;
 using Tickets.Core.Abstractions.Repositories.QryRepo;
 using Tickets.Infrastructure.Dal.Repositories.CmdRepos;

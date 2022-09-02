@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Notifications.Tickets.Mail.Commands;
-using Tickets.Core.Abstractions;
+using Tickets.Core.Abstractions.Mail;
+using Tickets.Core.Abstractions.Notifications.Tickets;
 using Tickets.Core.Abstractions.Repositories.QryRepo;
 using Tickets.Core.Aggregates.TicketAggregate;
 using Tickets.Core.Enums.Ticket;
@@ -31,11 +32,9 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
       try
       {
          var mailContent = _mailContentManager.TicketCreated(request.Ticket);
-         var mailAddressHeaders = await GenerateMailAddressHeadersAsync(
-            GetAppropriateSubscriptions(request.Ticket));
-         var mailMessages = _mailService.GenerateMailMessages(mailAddressHeaders, mailContent);
-         var failedMailMessages = await _mailService
-            .SendMailMessagesGetFailedAsync(mailMessages);
+         var mailAddressHeaders = await GenerateMailAddressHeadersAsync(GetProperSubscriptions(request.Ticket));
+         var mailMessages = mailAddressHeaders.Select(mah => new MailMessage(mah, mailContent));
+         var failedMailMessages = await _mailService.SendMailMessagesGetFailedAsync(mailMessages);
 
          if (failedMailMessages.Any())
          {
@@ -51,7 +50,7 @@ public class TicketCreatedMailNotificationHandler : IRequestHandler<TicketCreate
       return result;
    }
 
-   private static IEnumerable<TicketSubscription> GetAppropriateSubscriptions(Ticket ticket)
+   private static IEnumerable<TicketSubscription> GetProperSubscriptions(Ticket ticket)
       => ticket.Subscriptions.Where(s => s.IsActive
             && s.OnTicketAction == TicketSubscriptionAction.OnCreated
             && s.DistrType == TicketSubscriptionDistrType.Mail);
