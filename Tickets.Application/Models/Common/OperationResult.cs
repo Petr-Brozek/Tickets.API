@@ -7,6 +7,7 @@ public class OperationResult<T>
    public T? Payload { get; private set; }
    public bool IsError { get; private set; }
    public List<Error> Errors { get; private set; } = new List<Error>();
+   public List<Warning> Warnings { get; private set; } = new List<Warning>();
 
    public void SetPayload(T payload)
    {
@@ -23,6 +24,11 @@ public class OperationResult<T>
    {
       IsError = true;
       Errors.AddRange(errs);
+   }
+
+   public void AddWarning(Warning w)
+   {
+      Warnings.Add(w);
    }
 
    public void AddError(Exception e)
