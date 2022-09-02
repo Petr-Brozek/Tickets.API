@@ -20,12 +20,6 @@ public class OperationResult<T>
       Errors.Add(e);
    }
 
-   public void AddErrors(IEnumerable<Error> errs)
-   {
-      IsError = true;
-      Errors.AddRange(errs);
-   }
-
    public void AddWarning(Warning w)
    {
       Warnings.Add(w);
