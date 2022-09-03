@@ -2,10 +2,10 @@ using MediatR;
 using Tickets.Application.Enums;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Tickets.Commands;
-using Tickets.Core.Abstractions.Repositories.CmdRepo;
-using Tickets.Core.Abstractions.Repositories.QryRepo;
-using Tickets.Core.Aggregates.TicketAggregate;
-using Tickets.Core.Aggregates.UserProfileAggregate;
+using Tickets.Domain.Abstractions.Repositories.CmdRepo;
+using Tickets.Domain.Abstractions.Repositories.QryRepo;
+using Tickets.Domain.Aggregates.TicketAggregate;
+using Tickets.Domain.Aggregates.UserProfileAggregate;
 
 namespace Tickets.Application.Tickets.CommandHandlers;
 

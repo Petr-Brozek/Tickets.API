@@ -1,6 +1,6 @@
-﻿using Tickets.Core.Abstractions.Notifications.Tickets;
-using Tickets.Core.Aggregates.TicketAggregate;
-using Tickets.Core.Models.Mail;
+﻿using Tickets.Domain.Abstractions.Notifications.Tickets;
+using Tickets.Domain.Aggregates.TicketAggregate;
+using Tickets.Domain.Models.Mail;
 
 namespace Tickets.Application.Notifications.Tickets.Mail;
 public class TicketNotificationsMailContentMaker : ITicketNotificationsMailContentMaker

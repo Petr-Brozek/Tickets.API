@@ -222,7 +222,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.Ticket", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,7 +254,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketComment", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketComment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -283,7 +283,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("TicketComments");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketState", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketState", b =>
                 {
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
@@ -319,7 +319,7 @@ namespace Tickets.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketStateFlow", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketStateFlow", b =>
                 {
                     b.Property<string>("OriginalStateName")
                         .HasColumnType("nvarchar(450)");
@@ -376,7 +376,7 @@ namespace Tickets.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketSubscription", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketSubscription", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -411,7 +411,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("TicketSubscriptions");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.UserProfileAggregate.UserProfile", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.UserProfileAggregate.UserProfile", b =>
                 {
                     b.Property<Guid>("UserProfileId")
                         .ValueGeneratedOnAdd()
@@ -483,15 +483,15 @@ namespace Tickets.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.Ticket", b =>
                 {
-                    b.HasOne("Tickets.Core.Aggregates.UserProfileAggregate.UserProfile", "CreatedByUserProfile")
+                    b.HasOne("Tickets.Domain.Aggregates.UserProfileAggregate.UserProfile", "CreatedByUserProfile")
                         .WithMany()
                         .HasForeignKey("CreatedByUserProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Core.Aggregates.TicketAggregate.TicketState", "State")
+                    b.HasOne("Tickets.Domain.Aggregates.TicketAggregate.TicketState", "State")
                         .WithMany()
                         .HasForeignKey("StateName")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -502,24 +502,24 @@ namespace Tickets.Infrastructure.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketComment", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketComment", b =>
                 {
-                    b.HasOne("Tickets.Core.Aggregates.TicketAggregate.Ticket", null)
+                    b.HasOne("Tickets.Domain.Aggregates.TicketAggregate.Ticket", null)
                         .WithMany("Comments")
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketStateFlow", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketStateFlow", b =>
                 {
-                    b.HasOne("Tickets.Core.Aggregates.TicketAggregate.TicketState", "OriginalState")
+                    b.HasOne("Tickets.Domain.Aggregates.TicketAggregate.TicketState", "OriginalState")
                         .WithMany()
                         .HasForeignKey("OriginalStateName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Core.Aggregates.TicketAggregate.TicketState", "PossibleState")
+                    b.HasOne("Tickets.Domain.Aggregates.TicketAggregate.TicketState", "PossibleState")
                         .WithMany()
                         .HasForeignKey("PossibleStateName")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -530,18 +530,18 @@ namespace Tickets.Infrastructure.Migrations
                     b.Navigation("PossibleState");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketSubscription", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketSubscription", b =>
                 {
-                    b.HasOne("Tickets.Core.Aggregates.TicketAggregate.Ticket", null)
+                    b.HasOne("Tickets.Domain.Aggregates.TicketAggregate.Ticket", null)
                         .WithMany("Subscriptions")
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.UserProfileAggregate.UserProfile", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.UserProfileAggregate.UserProfile", b =>
                 {
-                    b.OwnsOne("Tickets.Core.Aggregates.UserProfileAggregate.BasicInfo", "BasicInfo", b1 =>
+                    b.OwnsOne("Tickets.Domain.Aggregates.UserProfileAggregate.BasicInfo", "BasicInfo", b1 =>
                         {
                             b1.Property<Guid>("UserProfileId")
                                 .HasColumnType("uniqueidentifier");
@@ -570,7 +570,7 @@ namespace Tickets.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.Ticket", b =>
                 {
                     b.Navigation("Comments");
 

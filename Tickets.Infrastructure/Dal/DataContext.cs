@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Tickets.Core.Aggregates.TicketAggregate;
-using Tickets.Core.Aggregates.UserProfileAggregate;
+using Tickets.Domain.Aggregates.TicketAggregate;
+using Tickets.Domain.Aggregates.UserProfileAggregate;
 using Tickets.Infrastructure.Dal.Configurations;
 
 namespace Tickets.Infrastructure.Dal;

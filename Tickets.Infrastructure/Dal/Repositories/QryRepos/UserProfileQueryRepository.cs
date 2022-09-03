@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tickets.Core.Abstractions.Repositories.QryRepo;
-using Tickets.Core.Aggregates.UserProfileAggregate;
+using Tickets.Domain.Abstractions.Repositories.QryRepo;
+using Tickets.Domain.Aggregates.UserProfileAggregate;
 
 namespace Tickets.Infrastructure.Dal.Repositories.QryRepos;
 

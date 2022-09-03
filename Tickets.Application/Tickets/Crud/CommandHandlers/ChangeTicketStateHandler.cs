@@ -2,8 +2,8 @@
 using Tickets.Application.Enums;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Tickets.Commands;
-using Tickets.Core.Abstractions.Repositories.CmdRepo;
-using Tickets.Core.Abstractions.Repositories.QryRepo;
+using Tickets.Domain.Abstractions.Repositories.CmdRepo;
+using Tickets.Domain.Abstractions.Repositories.QryRepo;
 
 namespace Tickets.Application.Tickets.CommandHandlers;
 

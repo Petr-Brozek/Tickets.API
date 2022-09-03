@@ -1,4 +1,4 @@
-﻿using Tickets.Core.Abstractions.Repositories.CmdRepo;
+﻿using Tickets.Domain.Abstractions.Repositories.CmdRepo;
 
 namespace Tickets.Infrastructure.Dal.Repositories.CmdRepos;
 

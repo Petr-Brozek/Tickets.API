@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tickets.Core.Aggregates.TicketAggregate;
+using Tickets.Domain.Aggregates.TicketAggregate;
 
 namespace Tickets.Infrastructure.Dal.Configurations;
 

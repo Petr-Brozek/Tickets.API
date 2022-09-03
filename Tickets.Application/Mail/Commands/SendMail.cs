@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Tickets.Application.Models.Common;
-using Tickets.Core.Models.Mail;
+using Tickets.Domain.Models.Mail;
 
 namespace Tickets.Application.Mail.Commands;
 

@@ -4,7 +4,7 @@ using Tickets.Application.Definitions.Identity;
 using Tickets.Application.Enums;
 using Tickets.Application.Identity.Commands;
 using Tickets.Application.Models.Common;
-using Tickets.Core.Aggregates.UserProfileAggregate;
+using Tickets.Domain.Aggregates.UserProfileAggregate;
 using Tickets.Infrastructure.Dal;
 
 namespace Tickets.Application.Identity.CommandHandlers;

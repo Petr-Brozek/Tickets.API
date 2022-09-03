@@ -2,12 +2,12 @@
 using System.Text.Json;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Notifications.Tickets.Mail.Commands;
-using Tickets.Core.Abstractions.Mail;
-using Tickets.Core.Abstractions.Notifications.Tickets;
-using Tickets.Core.Abstractions.Repositories.QryRepo;
-using Tickets.Core.Aggregates.TicketAggregate;
-using Tickets.Core.Enums.Ticket;
-using Tickets.Core.Models.Mail;
+using Tickets.Domain.Abstractions.Mail;
+using Tickets.Domain.Abstractions.Notifications.Tickets;
+using Tickets.Domain.Abstractions.Repositories.QryRepo;
+using Tickets.Domain.Aggregates.TicketAggregate;
+using Tickets.Domain.Enums.Ticket;
+using Tickets.Domain.Models.Mail;
 
 namespace Tickets.Application.Notifications.Tickets.Mail.CommandHandlers;
 

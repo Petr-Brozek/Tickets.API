@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Tickets.Application.Models.Common;
-using Tickets.Core.Aggregates.TicketAggregate;
+using Tickets.Domain.Aggregates.TicketAggregate;
 
 namespace Tickets.Application.Notifications.Tickets.Mail.Commands;
 

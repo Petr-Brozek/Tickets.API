@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Tickets.Core.Abstractions.Repositories.QryRepo;
+using Tickets.Domain.Abstractions.Repositories.QryRepo;
 
 namespace Tickets.Infrastructure.Dal.Repositories.QryRepos;
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tickets.Core.Aggregates.TicketAggregate;
-using Tickets.Core.Enums.Ticket;
+using Tickets.Domain.Aggregates.TicketAggregate;
+using Tickets.Domain.Enums.Ticket;
 
 namespace Tickets.Infrastructure.Dal.Configurations;
 internal class TicketSubscriptionConfig : IEntityTypeConfiguration<TicketSubscription>

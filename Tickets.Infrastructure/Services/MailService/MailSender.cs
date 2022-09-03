@@ -1,8 +1,8 @@
 ﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using MimeKit;
-using Tickets.Core.Abstractions.Mail;
-using Tickets.Core.Models.Mail;
+using Tickets.Domain.Abstractions.Mail;
+using Tickets.Domain.Models.Mail;
 
 namespace Tickets.Infrastructure.Services.MailService;
 

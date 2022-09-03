@@ -2,8 +2,8 @@ using MediatR;
 using Tickets.Application.Enums;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Tickets.Crud.Queries;
-using Tickets.Core.Abstractions.Repositories.QryRepo;
-using Tickets.Core.Aggregates.TicketAggregate;
+using Tickets.Domain.Abstractions.Repositories.QryRepo;
+using Tickets.Domain.Aggregates.TicketAggregate;
 
 namespace Tickets.Application.Tickets.Crud.QueryHandlers;
 

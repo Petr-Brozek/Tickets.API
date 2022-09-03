@@ -2,8 +2,8 @@ using MediatR;
 using Tickets.Application.Models.Common;
 using Tickets.Application.Tickets.Commands;
 using Tickets.Application.Tickets.Crud.Events;
-using Tickets.Core.Abstractions.Repositories.CmdRepo;
-using Tickets.Core.Aggregates.TicketAggregate;
+using Tickets.Domain.Abstractions.Repositories.CmdRepo;
+using Tickets.Domain.Aggregates.TicketAggregate;
 
 namespace Tickets.Application.Tickets.CommandHandlers;
 

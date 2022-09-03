@@ -1,4 +1,4 @@
-﻿using Tickets.Core.Aggregates.TicketAggregate;
+﻿using Tickets.Domain.Aggregates.TicketAggregate;
 
 namespace Tickets.Application.Tickets.Commands;
 public class TicketSubscriptionBase

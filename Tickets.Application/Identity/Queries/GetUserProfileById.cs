@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Tickets.Application.Models.Common;
-using Tickets.Core.Aggregates.UserProfileAggregate;
+using Tickets.Domain.Aggregates.UserProfileAggregate;
 
 namespace Tickets.Application.Identity.Queries;
 

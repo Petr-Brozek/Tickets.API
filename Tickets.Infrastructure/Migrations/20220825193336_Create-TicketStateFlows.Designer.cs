@@ -222,7 +222,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.Ticket", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -252,7 +252,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketComment", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketComment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,7 +281,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("TicketComments");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketStateFlow", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketStateFlow", b =>
                 {
                     b.Property<int>("OriginalState")
                         .HasColumnType("int");
@@ -298,7 +298,7 @@ namespace Tickets.Infrastructure.Migrations
                     b.ToTable("TicketStateFlows");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.UserProfileAggregate.UserProfile", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.UserProfileAggregate.UserProfile", b =>
                 {
                     b.Property<Guid>("UserProfileId")
                         .ValueGeneratedOnAdd()
@@ -370,9 +370,9 @@ namespace Tickets.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.Ticket", b =>
                 {
-                    b.HasOne("Tickets.Core.Aggregates.UserProfileAggregate.UserProfile", "CreatedByUserProfile")
+                    b.HasOne("Tickets.Domain.Aggregates.UserProfileAggregate.UserProfile", "CreatedByUserProfile")
                         .WithMany()
                         .HasForeignKey("CreatedByUserProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -381,18 +381,18 @@ namespace Tickets.Infrastructure.Migrations
                     b.Navigation("CreatedByUserProfile");
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.TicketComment", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.TicketComment", b =>
                 {
-                    b.HasOne("Tickets.Core.Aggregates.TicketAggregate.Ticket", null)
+                    b.HasOne("Tickets.Domain.Aggregates.TicketAggregate.Ticket", null)
                         .WithMany("Comments")
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.UserProfileAggregate.UserProfile", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.UserProfileAggregate.UserProfile", b =>
                 {
-                    b.OwnsOne("Tickets.Core.Aggregates.UserProfileAggregate.BasicInfo", "BasicInfo", b1 =>
+                    b.OwnsOne("Tickets.Domain.Aggregates.UserProfileAggregate.BasicInfo", "BasicInfo", b1 =>
                         {
                             b1.Property<Guid>("UserProfileId")
                                 .HasColumnType("uniqueidentifier");
@@ -421,7 +421,7 @@ namespace Tickets.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Core.Aggregates.TicketAggregate.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Aggregates.TicketAggregate.Ticket", b =>
                 {
                     b.Navigation("Comments");
                 });

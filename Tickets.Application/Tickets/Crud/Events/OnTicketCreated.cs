@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Tickets.Core.Aggregates.TicketAggregate;
+using Tickets.Domain.Aggregates.TicketAggregate;
 
 namespace Tickets.Application.Tickets.Crud.Events;
 
