@@ -13,16 +13,16 @@ public class InfrastructureLayerRegistrars : IWebApplicationBuilderRegistrar
 {
    public void RegisterServices(WebApplicationBuilder builder)
    {
-      // Repositoryz
-      builder.Services.AddScoped<ICommandRepositoryWrapper, CommandRepositoryWrapper>();
-      builder.Services.AddScoped<IQueryRepositoryWrapper, QueryRepositoryWrapper>();
-
-      // Mail
-      var emailConfig = builder.Configuration
-              .GetSection("EmailConfiguration")
-              .Get<MailConfiguration>();
-      builder.Services.AddSingleton(emailConfig);
-      builder.Services.AddScoped<IMailSender, MailSender>();
-      builder.Services.AddScoped<ITicketNotificationsMailContentMaker, TicketNotificationsMailContentMaker>();
+      // // Repositoryz
+      // builder.Services.AddScoped<ICommandRepositoryWrapper, CommandRepositoryWrapper>();
+      // builder.Services.AddScoped<IQueryRepositoryWrapper, QueryRepositoryWrapper>();
+      //
+      // // Mail
+      // var emailConfig = builder.Configuration
+      //         .GetSection("EmailConfiguration")
+      //         .Get<MailConfiguration>();
+      // builder.Services.AddSingleton(emailConfig);
+      // builder.Services.AddScoped<IMailSender, MailSender>();
+      // builder.Services.AddScoped<ITicketNotificationsMailContentMaker, TicketNotificationsMailContentMaker>();
    }
 }
