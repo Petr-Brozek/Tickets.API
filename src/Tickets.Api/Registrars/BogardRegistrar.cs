@@ -16,7 +16,6 @@ public class BogardRegistrar : IWebApplicationBuilderRegistrar
       builder.Logging.AddSerilog(logger);
 
       builder.Services.AddMediatR(typeof(GetAllTickets));
-
       builder.Services.AddAutoMapper(typeof(Program), typeof(GetAllTickets));
    }
 }

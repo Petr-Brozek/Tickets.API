@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tickets.Domain.Abstractions.Mail;
 using Tickets.Domain.Abstractions.Repositories.CmdRepo;
 using Tickets.Domain.Abstractions.Repositories.QryRepo;
+using Tickets.Infrastructure.Dal;
 using Tickets.Infrastructure.Dal.Repositories.CmdRepos;
 using Tickets.Infrastructure.Dal.Repositories.QryRepos;
 using Tickets.Infrastructure.Services.MailService;
@@ -22,6 +24,10 @@ public static class Extensions
             .Get<MailConfiguration>();
         services.AddSingleton(emailConfig);
         services.AddScoped<IMailSender, MailSender>();
+        
+        var cs = configuration.GetConnectionString("Default");
+        services.AddDbContext<DataContext>(options => { options.UseSqlServer(cs); });
+
         return services;
     }
 }
