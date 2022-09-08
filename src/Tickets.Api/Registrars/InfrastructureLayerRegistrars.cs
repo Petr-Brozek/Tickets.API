@@ -13,7 +13,7 @@ public class InfrastructureLayerRegistrars : IWebApplicationBuilderRegistrar
 {
    public void RegisterServices(WebApplicationBuilder builder)
    {
-      // Repository
+      // Repositoryz
       builder.Services.AddScoped<ICommandRepositoryWrapper, CommandRepositoryWrapper>();
       builder.Services.AddScoped<IQueryRepositoryWrapper, QueryRepositoryWrapper>();
 
